@@ -3,15 +3,16 @@
 import { useFormStatus } from 'react-dom';
 import { useState, useEffect } from 'react';
 import { deleteGuestbookEntries } from 'app/db/actions';
+import { Input } from 'postcss';
 
-export default function Form({ entries }) {
+export default function Form(entries: any) {
   const [selectedInputs, setSelectedInputs] = useState<string[]>([]);
   const [startShiftClickIndex, setStartShiftClickIndex] = useState<number>(0);
   const [isShiftKeyPressed, setIsShiftKeyPressed] = useState(false);
   const [isCommandKeyPressed, setIsCommandKeyPressed] = useState(false);
 
   useEffect(() => {
-    const keyDownHandler = ({ key }) => {
+    const keyDownHandler = (key: any) => {
       if (key === 'Shift') {
         setIsShiftKeyPressed(true);
       }
@@ -19,7 +20,7 @@ export default function Form({ entries }) {
         setIsCommandKeyPressed(true);
       }
     };
-    const keyUpHandler = ({ key }) => {
+    const keyUpHandler = (key: any) => {
       if (key === 'Shift') {
         setIsShiftKeyPressed(false);
       }
@@ -61,7 +62,7 @@ export default function Form({ entries }) {
     setSelectedInputs((prevInputs) => {
       const newSelection = entries
         .slice(startIndex, endIndex + 1)
-        .map((item) => item.id);
+        .map((item: any) => item.id);
 
       if (checked) {
         const combinedSelection = Array.from(
@@ -106,9 +107,11 @@ export default function Form({ entries }) {
       }}
     >
       <DeleteButton isActive={selectedInputs.length !== 0} />
-      {entries.map((entry, index) => (
+      {entries.map((entry: any, index: any) => (
         <GuestbookEntry key={entry.id} entry={entry}>
+          <label htmlFor="guessname">Guess: </label>
           <input
+            id="guessname"
             name={entry.id}
             type="checkbox"
             className="mr-2 w-4 h-4"
@@ -122,7 +125,7 @@ export default function Form({ entries }) {
   );
 }
 
-function GuestbookEntry({ entry, children }) {
+function GuestbookEntry(entry: any, children: any) {
   return (
     <div className="flex flex-col space-y-1 mb-4">
       <div className="w-full text-sm break-words items-center flex">
@@ -136,9 +139,9 @@ function GuestbookEntry({ entry, children }) {
   );
 }
 
-const cx = (...classes) => classes.filter(Boolean).join(' ');
+const cx = (...classes: any[]) => classes.filter(Boolean).join(' ');
 
-function DeleteButton({ isActive }) {
+function DeleteButton(isActive: any) {
   const { pending } = useFormStatus();
 
   return (

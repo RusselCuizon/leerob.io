@@ -6,15 +6,16 @@ import { highlight } from 'sugar-high';
 import React from 'react';
 import { LiveCode } from './sandpack';
 
-function Table({ data }) {
-  let headers = data.headers.map((header, index) => (
+function Table(data: any) {
+  let headers = data.headers.map((header: any, index: any) => (
     <th key={index}>{header}</th>
   ));
-  let rows = data.rows.map((row, index) => (
+  let rows = data.rows.map((row: any, index: any) => (
     <tr key={index}>
-      {row.map((cell, cellIndex) => (
+      {row.map((cell: any, cellIndex: any) => (
         <td key={cellIndex}>{cell}</td>
       ))}
+      r
     </tr>
   ));
 
@@ -46,11 +47,11 @@ function CustomLink(props) {
   return <a target="_blank" rel="noopener noreferrer" {...props} />;
 }
 
-function RoundedImage(props) {
+function RoundedImage(props: any) {
   return <Image alt={props.alt} className="rounded-lg" {...props} />;
 }
 
-function Callout(props) {
+function Callout(props: any) {
   return (
     <div className="px-4 py-3 border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 rounded p-1 text-sm flex items-center text-neutral-900 dark:text-neutral-100 mb-8">
       <div className="flex items-center w-4 mr-4">{props.emoji}</div>
@@ -59,12 +60,12 @@ function Callout(props) {
   );
 }
 
-function ProsCard({ title, pros }) {
+function ProsCard(title: any, pros: any) {
   return (
     <div className="border border-emerald-200 dark:border-emerald-900 bg-neutral-50 dark:bg-neutral-900 rounded-xl p-6 my-4 w-full">
       <span>{`You might use ${title} if...`}</span>
       <div className="mt-4">
-        {pros.map((pro) => (
+        {pros.map((pro: any) => (
           <div key={pro} className="flex font-medium items-baseline mb-2">
             <div className="h-4 w-4 mr-2">
               <svg className="h-4 w-4 text-emerald-500" viewBox="0 0 24 24">
@@ -88,12 +89,12 @@ function ProsCard({ title, pros }) {
   );
 }
 
-function ConsCard({ title, cons }) {
+function ConsCard(title: any, cons: any) {
   return (
     <div className="border border-red-200 dark:border-red-900 bg-neutral-50 dark:bg-neutral-900 rounded-xl p-6 my-6 w-full">
       <span>{`You might not use ${title} if...`}</span>
       <div className="mt-4">
-        {cons.map((con) => (
+        {cons.map((con: any) => (
           <div key={con} className="flex font-medium items-baseline mb-2">
             <div className="h-4 w-4 mr-2">
               <svg
@@ -113,12 +114,12 @@ function ConsCard({ title, cons }) {
   );
 }
 
-function Code({ children, ...props }) {
+function Code(children: any, ...props: any[]) {
   let codeHTML = highlight(children);
   return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
 }
 
-function slugify(str) {
+function slugify(str: any) {
   return str
     .toString()
     .toLowerCase()
@@ -129,8 +130,8 @@ function slugify(str) {
     .replace(/\-\-+/g, '-'); // Replace multiple - with single -
 }
 
-function createHeading(level) {
-  return ({ children }) => {
+function createHeading(level: any) {
+  return (children: any) => {
     let slug = slugify(children);
     return React.createElement(
       `h${level}`,
@@ -165,7 +166,7 @@ let components = {
   LiveCode,
 };
 
-export function CustomMDX(props) {
+export function CustomMDX(props: any) {
   return (
     <MDXRemote
       {...props}
